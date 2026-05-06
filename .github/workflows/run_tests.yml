@@ -1,0 +1,29 @@
+name: Ejecutar Tests
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Instalar dependencias
+        run: |
+          pip install -r requirements.txt
+
+      - name: Instalar Playwright
+        run: |
+          playwright install --with-deps
+
+      - name: Ejecutar tests
+        run: |
+          pytest
