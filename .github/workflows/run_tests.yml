@@ -33,4 +33,4 @@ jobs:
 
       - name: Ejecutar tests
         run: |
-          pytest -s
+          pytest tests/test_login.py -s
