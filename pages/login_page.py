@@ -1,4 +1,5 @@
 from utils.funciones import Funciones
+import re
 
 class LoginPage:
 
@@ -33,7 +34,12 @@ class LoginPage:
         self.funciones.click(self.menu_pruebas())
 
     def notas_aprobadas(self):
-        return self.page.locator("em.nota_seguimiento.aprobado")
+        return self.page.locator("em.nota_seguimiento.suspenso")
+
 
     def contar_notas_aprobadas(self):
-        return self.notas_aprobadas().count()
+
+        elementos = self.page.locator(".nota_seguimiento.suspenso")
+        textos = elementos.all_inner_texts()
+        numeros = [t for t in textos if re.match(r'^\d+(\.\d+)?$', t.strip())]
+        return len(numeros)
