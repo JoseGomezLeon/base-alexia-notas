@@ -26,3 +26,8 @@ def pytest_runtest_makereport(item, call):
         print("\n🤖 ===== ANÁLISIS IA =====")
         print(analisis)
         print("🤖 =======================\n")
+
+def pytest_playwright_browser_type_launch_args():
+    return {
+        "headless": True
+    }
